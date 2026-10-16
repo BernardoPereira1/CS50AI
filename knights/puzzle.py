@@ -12,11 +12,11 @@ CKnave = Symbol("C is a Knave")
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    # Regras básicas do habitante A
+    #Regras do habitante A
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
 
-    # O que A disse: "Sou cavaleiro E valete"
+    #A diz: "Sou cavaleiro E valete"
     Biconditional(AKnight, And(AKnight, AKnave))
 )
 
@@ -24,14 +24,35 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    # TODO
+    #Regras do habitante A
+    Or(AKnight, AKnave),
+    Not(And(AKnight, AKnave)),
+
+    #Regras do habitante B
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),
+
+    #A dizz: "Nós os dois somos valetes"
+    Biconditional(AKnight, And(AKnave, BKnave))
 )
 
 # Puzzle 2
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    # TODO
+    #Regras do habitante A
+    Or(AKnight, AKnave),
+    Not(And(AKnight, AKnave)),
+
+    #Regras do habitante B
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),
+
+    #A diz: "Somos do mesmo tipo"
+    Biconditional(AKnight, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
+
+    #B diz: "Somos de tipos diferentes"
+    Biconditional(BKnight, Or(And(AKnight, BKnave), And(AKnave, BKnight)))
 )
 
 # Puzzle 3
