@@ -28,7 +28,7 @@ knowledge1 = And(
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
 
-    #Regras do habitante B
+    # Regras do habitante B
     Or(BKnight, BKnave),
     Not(And(BKnight, BKnave)),
 
