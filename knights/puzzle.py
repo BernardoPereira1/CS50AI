@@ -12,11 +12,11 @@ CKnave = Symbol("C is a Knave")
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    #Regras do habitante A
+    # Regras do habitante A
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
 
-    #A diz: "Sou cavaleiro E valete"
+    # A diz: "Sou cavaleiro E valete"
     Biconditional(AKnight, And(AKnight, AKnave))
 )
 
@@ -24,7 +24,7 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    #Regras do habitante A
+    # Regras do habitante A
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
 
@@ -32,7 +32,7 @@ knowledge1 = And(
     Or(BKnight, BKnave),
     Not(And(BKnight, BKnave)),
 
-    #A dizz: "Nós os dois somos valetes"
+    # A diz: "Nós os dois somos valetes"
     Biconditional(AKnight, And(AKnave, BKnave))
 )
 
@@ -40,18 +40,18 @@ knowledge1 = And(
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    #Regras do habitante A
+    # Regras do habitante A
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
 
-    #Regras do habitante B
+    # Regras do habitante B
     Or(BKnight, BKnave),
     Not(And(BKnight, BKnave)),
 
-    #A diz: "Somos do mesmo tipo"
+    # A diz: "Somos do mesmo tipo"
     Biconditional(AKnight, Or(And(AKnight, BKnight), And(AKnave, BKnave))),
 
-    #B diz: "Somos de tipos diferentes"
+    # B diz: "Somos de tipos diferentes"
     Biconditional(BKnight, Or(And(AKnight, BKnave), And(AKnave, BKnight)))
 )
 
@@ -61,7 +61,32 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    # TODO
+    # Regras do habitante A
+    Or(AKnight, AKnave),
+    Not(And(AKnight, AKnave)),
+
+    # Regras do habitante B
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),
+
+    # Regras do habitante C
+    Or(CKnight, CKnave),
+    Not(And(CKnight, CKnave)),
+
+    # A diz uma de duas frases
+    Or(
+        Biconditional(AKnight, AKnight),  # A disse "sou cavaleiro"
+        Biconditional(AKnight, AKnave)   # A disse "sou valete"
+    ),
+
+    # B diz: "A disse 'sou valete'"
+    Biconditional(BKnight, Biconditional(AKnight, AKnave)),
+
+    # B diz: "C é um valete"
+    Biconditional(BKnight, CKnave),
+
+    # C diz: "A é um cavaleiro"
+    Biconditional(CKnight, AKnight)
 )
 
 
